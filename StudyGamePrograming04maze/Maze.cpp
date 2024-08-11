@@ -22,6 +22,9 @@ Maze::Maze(Game* game, int mapWidth, int mapHeight)
 	, mMapHeight(mapHeight)
 	, gameStart(false)
 	, gameClear(false)
+	, resetStart(true)
+	, resetPending(false)
+	, resetEnd(false)
 {
 	//横幅、縦幅をともに7以上の奇数にする。
 	while (mMapWidth < 7 || mMapWidth % 2 == 0) { mMapWidth++;}
@@ -46,11 +49,18 @@ Maze::Maze(Game* game, int mapWidth, int mapHeight)
 	mShadow = new Shadow(game);			//AIプレイヤー
 	mTreasure = new Treasure(game);		//ゴール
 	mClearPict = new ClearPict(game);	//クリア画面
-	GenerateMap();
 }
 
 void Maze::ActorInput(const SDL_Event& event)
 {
+	if (event.type == SDL_KEYUP)
+	{
+		// キーが離されたとき
+		if (event.key.keysym.sym == SDLK_r)
+		{
+			resetStart = true;
+		}
+	}
 }
 
 void Maze::UpdateActor(float deltaTime){
@@ -59,31 +69,71 @@ void Maze::UpdateActor(float deltaTime){
 		mClearPict->SetState(EActive);
 		mClearPict->GetSprite()->SetVisible(true);
 	}
+	if (resetStart == true)
+	{
+		mBrave->SetState(EPaused);
+		mBrave->GetSprite()->SetVisible(false);
+		mShadow->SetState(EPaused);
+		mShadow->GetSprite()->SetVisible(false);
+		mTreasure->SetState(EPaused);
+		mTreasure->GetSprite()->SetVisible(false);
+		mClearPict->SetState(EPaused);
+		mClearPict->GetSprite()->SetVisible(false);
+		for (int i = 0; i < mTiles.size(); i++)
+		{
+			mTiles[i].resize(mMapHeight);
+			mMapIndex[i].resize(mMapHeight);
+
+			for (int j = 0; j < mTiles[i].size(); j++)
+			{
+				mTiles[i][j]->SetState(EPaused);
+				mTiles[i][j]->GetSprite()->SetVisible(false);
+				mTiles[i][j]->mAdjacent.clear();
+				mTiles[i][j]->mParent = nullptr;
+				mMapIndex[i][j] = 0;
+			}
+		}
+		resetStart = false;
+		resetPending = true;
+		gameStart = false;
+		gameClear = false;
+	}
+	else if (resetPending == true)
+	{
+		GenerateMap();
+		//隣接ノード作成
+		MakeGraphNodes(mTiles);
+		// 道順探索 (逆順)
+		if (FindPath(GetGoalTile(), GetStartTile())) {
+			mShadow->GetNav()->SetStartNode(GetStartTile());
+		}
+		resetPending = false;
+		resetEnd = true;
+	}
+	else if (resetEnd == true)
+	{
+		mBrave->SetState(EActive);
+		mBrave->GetSprite()->SetVisible(true);
+		mBrave->SetPosition(GetTilePos(starti, startj));
+		mShadow->SetState(EActive);
+		mShadow->GetSprite()->SetVisible(true);
+		mShadow->SetPosition(GetTilePos(starti, startj));
+		mTreasure->SetState(EActive);
+		mTreasure->GetSprite()->SetVisible(true);
+		mTreasure->SetPosition(GetTilePos(goali, goalj));
+		for (auto ctiles : mTiles) {
+			for (auto tile : ctiles) {
+				tile->SetState(EActive);
+				tile->GetSprite()->SetVisible(true);
+			}
+		}
+		resetEnd = false;
+		gameStart = true;
+	}
 }
 
 void Maze::GenerateMap()
 {
-	mBrave->SetState(EPaused);
-	mBrave->GetSprite()->SetVisible(false);
-	mShadow->SetState(EPaused);
-	mShadow->GetSprite()->SetVisible(false);
-	mTreasure->SetState(EPaused);
-	mTreasure->GetSprite()->SetVisible(false);
-	mClearPict->SetState(EPaused);
-	mClearPict->GetSprite()->SetVisible(false);
-	for (int i = 0; i < mTiles.size(); i++)
-	{
-		mTiles[i].resize(mMapHeight);
-		mMapIndex[i].resize(mMapHeight);
-
-		for (int j = 0; j < mTiles[i].size(); j++)
-		{
-			mTiles[i][j]->SetState(EPaused);
-			mTiles[i][j]->GetSprite()->SetVisible(false);
-			mMapIndex[i][j] = 0;
-		}
-	}
-
 	//迷路作成
 	bool mazeNG = true;
 	while (mazeNG)
@@ -123,28 +173,6 @@ void Maze::GenerateMap()
 			mTiles[i][j]->SetPosition(GetTilePos(i, j));
 		}
 	}
-
-	MakeGraphNodes(mTiles);
-	if (FindPath(GetGoalTile(), GetStartTile())) {
-		mShadow->GetNav()->SetStartNode(GetStartTile());
-	}
-
-	mBrave->SetState(EActive);
-	mBrave->GetSprite()->SetVisible(true);
-	mBrave->SetPosition(GetTilePos(starti, startj));
-	mShadow->SetState(EActive);
-	mShadow->GetSprite()->SetVisible(true);
-	mShadow->SetPosition(GetTilePos(starti, startj));
-	mTreasure->SetState(EActive);
-	mTreasure->GetSprite()->SetVisible(true);
-	mTreasure->SetPosition(GetTilePos(goali, goalj));
-	for (auto ctiles : mTiles) {
-		for (auto tile : ctiles) {
-			tile->SetState(EActive);
-			tile->GetSprite()->SetVisible(true);
-		}
-	}		
-	gameStart = true;
 }
 
 Vector2 Maze::GetTilePos(int i, int j)
