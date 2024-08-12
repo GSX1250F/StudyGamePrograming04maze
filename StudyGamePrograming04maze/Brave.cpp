@@ -14,7 +14,7 @@ Brave::Brave(Game* game)
 {
 	SetScale(0.85f);
 	// アニメーションのスプライトコンポーネントを作成
-	asc = new AnimSpriteComponent(this, 40);
+	asc = new AnimSpriteComponent(this, 45);
 	std::vector<SDL_Texture*> anims = {
 		game->GetRenderer()->GetTexture("Assets/Brave01.png"),
 		game->GetRenderer()->GetTexture("Assets/Brave02.png"),
