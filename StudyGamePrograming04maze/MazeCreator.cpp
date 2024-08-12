@@ -183,9 +183,7 @@ void Dig(Vector2 cell)
 // 座標を通路とする(穴掘り開始座標候補の場合は保持)
 void SetPath(Vector2 cell)
 {
-    int x = static_cast<int>(cell.x);
-    int y = static_cast<int>(cell.y);
-    maze[x][y] = path;
+    maze[static_cast<int>(cell.x)][static_cast<int>(cell.y)] = path;
     if ((static_cast<int>(cell.x) % 2 == 1) && (static_cast<int>(cell.y) % 2 == 1))
     {
         // 穴掘り候補座標
