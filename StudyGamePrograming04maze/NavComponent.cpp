@@ -11,8 +11,7 @@ void NavComponent::Update(float deltaTime)
 	if (mNextNode)
 	{
 		Vector2 diff = mNextNode->GetPosition() - mOwner->GetPosition();
-		mNextDirVector = diff;
-		mNextDirVector.Normalize();
+		mNextDirVector = Vector2::Normalize(diff);
 		mNextDirAngle = Math::Atan2(-mNextDirVector.y, mNextDirVector.x);
 		SetVelocity(speed * mNextDirVector);
 

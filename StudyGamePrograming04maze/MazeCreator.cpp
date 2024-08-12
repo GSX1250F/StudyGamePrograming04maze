@@ -103,16 +103,25 @@ void Dig(Vector2 cell)
     {
         // 掘り進めることができる方向のリストを作成
         std::vector<Direction> directions;
-        if (maze[cell.x][cell.y - 1] == wall && maze[cell.x][cell.y - 2] == wall) { directions.push_back(up); }
-        if (maze[cell.x + 1][cell.y] == wall && maze[cell.x + 2][cell.y] == wall) { directions.push_back(right); }
-        if (maze[cell.x][cell.y + 1] == wall && maze[cell.x][cell.y + 2] == wall) { directions.push_back(down); }
-        if (maze[cell.x - 1][cell.y] == wall && maze[cell.x - 2][cell.y] == wall) { directions.push_back(left); }
-
+        int x = static_cast<int>(cell.x);
+        int y = static_cast<int>(cell.y);
+        if (y >= 2) {
+            if(maze[x][y - 1] == wall && maze[x][y - 2] == wall) { directions.push_back(up); }
+        }
+        if (x + 2 <= mWidth - 1) {
+            if (maze[x + 1][y] == wall && maze[x + 2][y] == wall) { directions.push_back(right); }
+        }
+        if (y + 2 <= mHeight - 1) {
+            if (maze[x][y + 1] == wall && maze[x][y + 2] == wall) { directions.push_back(down); }
+        }
+        if (x >= 2) {
+            if (maze[x - 1][y] == wall && maze[x - 2][y] == wall) { directions.push_back(left); }
+        }
         // 掘り進められない場合、ループを抜ける。掘り進めが１回目ならそこをゴールとする。
         if (directions.size() == 0) {
             if (digCount == 0)
             {
-                maze[cell.x][cell.y] = goal;
+                maze[x][y] = goal;
             }
             digCount++;
 
@@ -174,7 +183,9 @@ void Dig(Vector2 cell)
 // 座標を通路とする(穴掘り開始座標候補の場合は保持)
 void SetPath(Vector2 cell)
 {
-    maze[cell.x][cell.y] = path;
+    int x = static_cast<int>(cell.x);
+    int y = static_cast<int>(cell.y);
+    maze[x][y] = path;
     if ((static_cast<int>(cell.x) % 2 == 1) && (static_cast<int>(cell.y) % 2 == 1))
     {
         // 穴掘り候補座標

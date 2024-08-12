@@ -9,7 +9,7 @@ Tile::Tile(class Game* game)
 	, mTileState(EDefault)
 	, mParent(nullptr)
 {
-	// アニメーションのスプライトコンポーネントを作成
+	//スプライトコンポーネントを作成
 	ssc = new SomeSpriteComponent(this, 10);
 	ssc->TextureFiles = {
 		"Assets/Default.png",
