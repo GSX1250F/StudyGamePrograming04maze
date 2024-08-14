@@ -11,14 +11,16 @@ void NavComponent::Update(float deltaTime)
 	if (mNextNode)
 	{
 		Vector2 diff = mNextNode->GetPosition() - mOwner->GetPosition();
-		mNextDirVector = Vector2::Normalize(diff);
-		mNextDirAngle = Math::Atan2(-mNextDirVector.y, mNextDirVector.x);
-		SetVelocity(speed * mNextDirVector);
-
-		if (Math::NearZero(diff.Length(), 2.0f))
+		float nextspeed = speed;
+		if (speed * deltaTime > diff.Length()) { nextspeed = speed / 2.0f; }
+		if (diff.Length() <= speed / 2.0f * deltaTime)
 		{
 			mNextNode = mNextNode->mParent;
 		}
+		mNextDirVector = Vector2::Normalize(diff);
+		mNextDirAngle = Math::Atan2(-mNextDirVector.y, mNextDirVector.x);
+		
+		SetVelocity(nextspeed * mNextDirVector);		
 	}
 
 	MoveComponent::Update(deltaTime);
