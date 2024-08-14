@@ -130,14 +130,13 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	//mMaze = new Maze(this, 51, 29);		//迷路クラス
-	mMaze = new Maze(this, 7, 7);		//テスト用
+	mMaze = new Maze(this, 51, 29);		//迷路クラス
+	//mMaze = new Maze(this, 7, 7);		//テスト用
 }
 
 void Game::UnloadData()
 {
 	// actorsを消去
-	// ~ActorではRemoveActorが呼び出されるので、別の種類のループを使う
 	while (!mActors.empty())
 	{
 		delete mActors.back();

@@ -88,8 +88,8 @@ void Maze::UpdateActor(float deltaTime){
 			{
 				mTiles[i][j]->SetState(EPaused);
 				mTiles[i][j]->GetSprite()->SetVisible(false);
-				mTiles[i][j]->mAdjacent.clear();
-				mTiles[i][j]->mParent = nullptr;
+				mTiles[i][j]->ClearAdjacent();
+				mTiles[i][j]->SetParent(nullptr);
 				mMapIndex[i][j] = 0;
 			}
 		}
@@ -198,22 +198,22 @@ void Maze::MakeGraphNodes(std::vector<std::vector<class Tile*>> &tiles)
 			if (tiles[i][j]->GetTileState() != Tile::EWall) {
 				if (i > 0) {
 					if (tiles[i - 1][j]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->mAdjacent.push_back(tiles[i - 1][j]);
+						tiles[i][j]->SetAdjacent((tiles[i - 1][j]));
 					}
 				}
 				if (i + 1 <= tiles.size() - 1) {
 					if (tiles[i + 1][j]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->mAdjacent.push_back(tiles[i + 1][j]);
+						tiles[i][j]->SetAdjacent((tiles[i + 1][j]));
 					}
 				}
 				if (j > 0){
 					if (tiles[i][j - 1]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->mAdjacent.push_back(tiles[i][j - 1]);
+						tiles[i][j]->SetAdjacent((tiles[i][j - 1]));
 					}
 				}
 				if (j + 1 <= tiles[i].size() - 1){
 					if (tiles[i][j + 1]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->mAdjacent.push_back(tiles[i][j + 1]);
+						tiles[i][j]->SetAdjacent((tiles[i][j + 1]));
 					}
 				}				
 			}
@@ -240,7 +240,7 @@ bool Maze::FindPath(Tile* start, Tile* goal)
 			break;
 		}
 		// まだキューに入っていない隣接ノードをエンキューする。
-		for (Tile* node : current->mAdjacent)
+		for (Tile* node : current->GetAdjacent())
 		{
 			// 検討中のノードの隣接ノードのすべてについて親があるかを調べる。
 			Tile* parent = outMap[node];	// outMapは、ノードと親の関係マップ
@@ -249,7 +249,7 @@ bool Maze::FindPath(Tile* start, Tile* goal)
 			{
 				// このノードのエンキューと親の設定をする。
 				outMap[node] = current;
-				node->mParent = current;
+				node->SetParent(current);
 				q.emplace(node);
 			}
 		}		

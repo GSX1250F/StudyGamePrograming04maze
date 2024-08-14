@@ -13,8 +13,6 @@ AnimSpriteComponent::AnimSpriteComponent(Actor* owner, int drawOrder)
 
 void AnimSpriteComponent::Update(float deltaTime)
 {
-	SpriteComponent::Update(deltaTime);
-
 	if (mAnimTextures.size() > 0)
 	{
 		mCurrFrame += mAnimFPS * deltaTime;		// 現在のフレームを更新する
@@ -40,6 +38,7 @@ void AnimSpriteComponent::Update(float deltaTime)
 		}
 		SetTexture(mAnimTextures[static_cast<int>(mCurrFrame)]);		// 現時点でのテクスチャを設定する
 	}
+	SpriteComponent::Update(deltaTime);
 }
 
 void AnimSpriteComponent::SetAnimTextures(const std::vector<SDL_Texture*>& textures)

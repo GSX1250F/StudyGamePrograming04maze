@@ -13,9 +13,7 @@ Tile::Tile(class Game* game)
 	ssc = new SomeSpriteComponent(this, 10);
 	ssc->TextureFiles = {
 		"Assets/Default.png",
-		"Assets/Wall.png",
-		"Assets/Path.png",
-		"Assets/Treasure.png"
+		"Assets/Wall.png"
 	};
 	ssc->SetSomeTextures(ssc->TextureFiles);
 	mTexSize = ssc->GetTexWidth();

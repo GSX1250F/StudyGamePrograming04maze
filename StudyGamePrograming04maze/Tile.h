@@ -22,9 +22,11 @@ public:
 	TileState GetTileState() { return mTileState; }
 	float GetTexSize() { return mTexSize; }
 	void SetTileState(TileState);
-	
-	std::vector<class Tile*> mAdjacent;	//隣接ノード配列
-	Tile* mParent;	//親ノード
+	void SetAdjacent(class Tile* tile) { mAdjacent.push_back(tile); }
+	void ClearAdjacent() { mAdjacent.clear(); }
+	std::vector<class Tile*> GetAdjacent() { return mAdjacent; }
+	void SetParent(class Tile* tile) { mParent = tile; }
+	class Tile* GetParent() { return mParent; }
 
 
 private:
@@ -33,4 +35,8 @@ private:
 
 	TileState mTileState;
 	float mTexSize;
+
+	std::vector<class Tile*> mAdjacent;	//隣接ノード配列
+	Tile* mParent;	//親ノード
+
 };
