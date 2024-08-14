@@ -198,22 +198,22 @@ void Maze::MakeGraphNodes(std::vector<std::vector<class Tile*>> &tiles)
 			if (tiles[i][j]->GetTileState() != Tile::EWall) {
 				if (i > 0) {
 					if (tiles[i - 1][j]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->SetAdjacent((tiles[i - 1][j]));
+						tiles[i][j]->SetAdjacent(tiles[i - 1][j]);
 					}
 				}
 				if (i + 1 <= tiles.size() - 1) {
 					if (tiles[i + 1][j]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->SetAdjacent((tiles[i + 1][j]));
+						tiles[i][j]->SetAdjacent(tiles[i + 1][j]);
 					}
 				}
 				if (j > 0){
 					if (tiles[i][j - 1]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->SetAdjacent((tiles[i][j - 1]));
+						tiles[i][j]->SetAdjacent(tiles[i][j - 1]);
 					}
 				}
 				if (j + 1 <= tiles[i].size() - 1){
 					if (tiles[i][j + 1]->GetTileState() != Tile::EWall) {
-						tiles[i][j]->SetAdjacent((tiles[i][j + 1]));
+						tiles[i][j]->SetAdjacent(tiles[i][j + 1]);
 					}
 				}				
 			}
