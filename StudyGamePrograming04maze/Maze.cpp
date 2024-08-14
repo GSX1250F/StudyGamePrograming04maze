@@ -101,12 +101,6 @@ void Maze::UpdateActor(float deltaTime){
 	else if (resetPending == true)
 	{
 		GenerateMap();
-		//—×Úƒm[ƒhì¬
-		MakeGraphNodes(mTiles);
-		// “¹‡’Tõ (‹t‡)
-		if (FindPath(GetGoalTile(), GetStartTile())) {
-			mShadow->GetNav()->SetStartNode(GetStartTile());
-		}
 		resetPending = false;
 		resetEnd = true;
 	}
@@ -126,6 +120,12 @@ void Maze::UpdateActor(float deltaTime){
 				tile->SetState(EActive);
 				tile->GetSprite()->SetVisible(true);
 			}
+		}
+		//—×Úƒm[ƒhì¬
+		MakeGraphNodes(mTiles);
+		// “¹‡’Tõ (‹t‡)
+		if (FindPath(GetGoalTile(), GetStartTile())) {
+			mShadow->GetNav()->SetStartNode(GetStartTile());
 		}
 		resetEnd = false;
 		gameStart = true;
