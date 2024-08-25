@@ -22,10 +22,36 @@ Partial Class Game
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "Form1"
+        components = New ComponentModel.Container()
+        PictureBox = New PictureBox()
+        RunLoop = New Timer(components)
+        CType(PictureBox, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' PictureBox
+        ' 
+        PictureBox.Location = New Point(34, 23)
+        PictureBox.Name = "PictureBox"
+        PictureBox.Size = New Size(537, 310)
+        PictureBox.TabIndex = 0
+        PictureBox.TabStop = False
+        ' 
+        ' RunLoop
+        ' 
+        ' 
+        ' Game
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(800, 450)
+        Controls.Add(PictureBox)
+        Name = "Game"
+        Text = "Game"
+        CType(PictureBox, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
     End Sub
+
+    Friend WithEvents PictureBox As PictureBox
+    Friend WithEvents RunLoop As Timer
 
 End Class

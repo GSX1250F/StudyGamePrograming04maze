@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StudyGamePrograming04maze", "StudyGamePrograming04maze\StudyGamePrograming04maze.vcxproj", "{C4E866B3-8E1D-4764-A07C-D414EFBD6048}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "StudyGamePrograming04maze_VB", "StudyGamePrograming04maze_VB\StudyGamePrograming04maze_VB.vbproj", "{61F6F3C5-5CC2-4C64-9447-5A83A6CD87FF}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "StudyGamePrograming04maze_VB", "StudyGamePrograming04maze_VB\StudyGamePrograming04maze_VB.vbproj", "{61F6F3C5-5CC2-4C64-9447-5A83A6CD87FF}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "StudyGamePrograming04maze_VB_FW", "StudyGamePrograming04maze_VB_FW\StudyGamePrograming04maze_VB_FW.vbproj", "{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,18 @@ Global
 		{61F6F3C5-5CC2-4C64-9447-5A83A6CD87FF}.Release|x64.Build.0 = Release|Any CPU
 		{61F6F3C5-5CC2-4C64-9447-5A83A6CD87FF}.Release|x86.ActiveCfg = Release|Any CPU
 		{61F6F3C5-5CC2-4C64-9447-5A83A6CD87FF}.Release|x86.Build.0 = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|x64.Build.0 = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|x64.ActiveCfg = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|x64.Build.0 = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{22053B19-FD7D-46E1-9A4D-AE6260FB4F2F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
