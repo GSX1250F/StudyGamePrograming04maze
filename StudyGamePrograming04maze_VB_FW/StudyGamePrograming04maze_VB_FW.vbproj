@@ -81,7 +81,9 @@
     <Compile Include="CircleComponent.vb" />
     <Compile Include="ClearPict.vb" />
     <Compile Include="Component.vb" />
-    <Compile Include="Game.Designer.vb" />
+    <Compile Include="Game.Designer.vb">
+      <DependentUpon>Game.vb</DependentUpon>
+    </Compile>
     <Compile Include="Game.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -112,7 +114,6 @@
     <Compile Include="Treasure.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Game.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
