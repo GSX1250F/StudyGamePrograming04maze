@@ -28,6 +28,8 @@ public:
 	void SetParent(class Tile* tile) { mParent = tile; }
 	class Tile* GetParent() { return mParent; }
 
+	class SquareComponent* GetSquare() { return sq; }
+
 
 private:
 	class SomeSpriteComponent* ssc;
@@ -39,4 +41,5 @@ private:
 	std::vector<class Tile*> mAdjacent;	//隣接ノード配列
 	Tile* mParent;	//親ノード
 
+	class SquareComponent* sq;
 };

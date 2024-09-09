@@ -7,6 +7,7 @@
 #include "AnimSpriteComponent.h"
 #include "CircleComponent.h"
 #include "MoveComponent.h"
+#include "SquareComponent.h"
 
 Brave::Brave(Game* game)
 	: Actor(game)
@@ -37,7 +38,10 @@ Brave::Brave(Game* game)
 	asc->SetAnimNum(0, 3, true);
 
 	//CircleComponentì¬
-	cc = new CircleComponent(this);
+	//cc = new CircleComponent(this);
+
+	//SquareComponentì¬
+	sq = new SquareComponent(this);
 
 	//MoveComponentì¬
 	mc = new MoveComponent(this);	
@@ -91,12 +95,20 @@ void Brave::UpdateActor(float deltaTime){
 		{
 			for (auto tile : tilecol)
 			{
+				/*
 				if (tile->GetTileState() == Tile::EWall) {
 					//•Ç‚ÉÕ“Ë‚µ‚Ä‚¢‚½‚ç—£‚·B
 					if (Intersect(*cc, *tile->GetCircle())) {
 						//‚Q‚Â‚Ì’†S‚ğŒ‹‚Ôü•ªã‚ÅA‚Q‚Â‚Ì”¼Œa‚¾‚¯—£‚·
 						Vector2 diff = Vector2::Normalize(this->GetPosition() - tile->GetPosition());
 						this->SetPosition(tile->GetPosition() + diff * (this->GetRadius() + tile->GetRadius()));
+					}
+				}
+				*/
+				if (tile->GetTileState() == Tile::EWall) {
+					//•Ç‚ÉÕ“Ë‚µ‚Ä‚¢‚½‚ç—£‚·B
+					if (Intersect(*sq, *tile->GetSquare())) {
+						int i = 1;
 					}
 				}
 			}

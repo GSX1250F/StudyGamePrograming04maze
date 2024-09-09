@@ -11,6 +11,7 @@ public:
 	class CircleComponent* GetCircle() { return cc; }
 	float GetSpeed() { return speed; }
 
+	class SquareComponent* GetSquare() { return sq; }
 
 private:
 	class AnimSpriteComponent* asc;
@@ -18,4 +19,6 @@ private:
 	class MoveComponent* mc;
 
 	float speed;
+
+	class SquareComponent* sq;
 };
