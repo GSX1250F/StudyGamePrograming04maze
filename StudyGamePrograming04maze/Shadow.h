@@ -17,5 +17,7 @@ private:
 	class CircleComponent* cc;
 	class NavComponent* nc;	
 	float speed;
+
+	class SquareComponent* sq;
 };
 
