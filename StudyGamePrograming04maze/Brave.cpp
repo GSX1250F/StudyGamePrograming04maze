@@ -38,10 +38,10 @@ Brave::Brave(Game* game)
 	asc->SetAnimNum(0, 3, true);
 
 	//CircleComponentì¬
-	//cc = new CircleComponent(this);
+	cc = new CircleComponent(this);
 
 	//SquareComponentì¬
-	sq = new SquareComponent(this);
+	//sq = new SquareComponent(this);
 
 	//MoveComponentì¬
 	mc = new MoveComponent(this);	
@@ -95,7 +95,6 @@ void Brave::UpdateActor(float deltaTime){
 		{
 			for (auto tile : tilecol)
 			{
-				/*
 				if (tile->GetTileState() == Tile::EWall) {
 					//•Ç‚ÉÕ“Ë‚µ‚Ä‚¢‚½‚ç—£‚·B
 					if (Intersect(*cc, *tile->GetCircle())) {
@@ -104,13 +103,36 @@ void Brave::UpdateActor(float deltaTime){
 						this->SetPosition(tile->GetPosition() + diff * (this->GetRadius() + tile->GetRadius()));
 					}
 				}
-				*/
+				/*
 				if (tile->GetTileState() == Tile::EWall) {
 					//•Ç‚ÉÕ“Ë‚µ‚Ä‚¢‚½‚ç—£‚·B
 					if (Intersect(*sq, *tile->GetSquare())) {
-						int i = 1;
-					}
+						float posx = GetPosition().x;
+						float posy = GetPosition().y;
+						if (mc->GetVelocity().y > 0)
+						{
+							//‰ºˆÚ“®’†
+							posy = tile->GetPosition().y - tile->GetRadius() - GetRadius() * 1.2f;
+						}
+						if (mc->GetVelocity().x > 0)
+						{
+							//‰EˆÚ“®’†
+							posx = tile->GetPosition().x - tile->GetRadius() - GetRadius() * 1.2f;
+						}
+						if (mc->GetVelocity().y < 0)
+						{
+							//ãˆÚ“®’†
+							posy = tile->GetPosition().y + tile->GetRadius() + GetRadius() * 1.2f;
+						}
+						if (mc->GetVelocity().x < 0)
+						{
+							//¶ˆÚ“®’†
+							posx = tile->GetPosition().x + tile->GetRadius() + GetRadius() * 1.2f;
+						}
+						SetPosition(Vector2(posx, posy));						
+					}					
 				}
+				*/
 			}
 		}
 	}	

@@ -9,8 +9,11 @@ public:
 	void Update(float deltaTime) override;
 	// 並進移動速度
 	void SetVelocity(Vector2 vel) { mVelocity = vel; }
+	Vector2 GetVelocity() { return mVelocity; }
 	// 回転速度
 	void SetRotSpeed(float rotspeed) { mRotSpeed = rotspeed; }
+	float GetRotSpeed() { return mRotSpeed; }
+
 
 private:
 	Vector2 mVelocity;		// 並進移動速度

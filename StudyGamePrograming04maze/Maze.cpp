@@ -121,12 +121,14 @@ void Maze::UpdateActor(float deltaTime){
 				tile->GetSprite()->SetVisible(true);
 			}
 		}
+		
 		//—×Úƒm[ƒhì¬
 		MakeGraphNodes(mTiles);
 		// “¹‡’Tõ (‹t‡)
 		if (FindPath(GetGoalTile(), GetStartTile())) {
 			mShadow->GetNav()->SetStartNode(GetStartTile());
 		}
+		
 		resetEnd = false;
 		gameStart = true;
 	}
